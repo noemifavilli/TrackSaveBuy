@@ -1,0 +1,151 @@
+/*General style*/
+body {
+    font-family: Georgia, serif;
+    background-colour: #b3e6ff; /*Light blue*/
+    colour: #333; /*Dark grey for texts*/
+    margin: 0;
+    padding: 1;
+}
+
+/*Navigation bar style*/
+.navbar {
+    background-colour: #dde8ed; /*Light background*/
+    padding: 10px 20px;
+}
+
+.navbar .navbar-brand {
+    colour: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    colour: white /*White texts for inside the links in navbar*/
+    padding: 10px 15px;
+}
+
+.navbar .navbar-nav .nav-item .nav-link:hover {
+    background-colour: #0077b3; /*Dark blue when hovering over links*/
+    border-radius: 5px;
+}
+
+/*Form style*/
+.form-group {
+    margin-bottom: 15px; /*This is the space between fields*/
+}
+
+.form-control {
+    width: 75%; /*Form fields take up 75% of width*/
+    padding: 10px; /*Padding inside fields*/
+    border-radius: 5px; /*Rounder corners*/
+    border: 1px solid #ccc; /*Light grey borders*/
+}
+
+.form-control:focus {
+    border-colour: #0099e6; /*Blue border when focused*/
+    outline: none; /*Remove default outline*/
+}
+
+/*Error message style*/
+.help-block {
+    font-size: 5px:
+    colour: red;
+}
+
+/*Button style*/
+.btn {
+    background-colour: #0099e6/*Also blue button*/
+    colour: white; /*White texts*/
+    padding: 10px 20px;
+    border-radius: 5px /*Rounded corners*/
+    border: none; /*No borders around buttons*/
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-colour: #0056b3; /*Darker blue*/
+}
+
+/*Footer style*/
+footer {
+    background-colour: #0077b3;
+    colour: white;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%
+    bottom: 0;
+}
+
+footer p {
+    margin: 0; /*No margin around footer texts*/
+}
+
+/*Container style*/
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2px;
+}
+
+/*Cards for singular transactions/refunds etc*/
+.card {
+    border-radius: 10px;
+    border: 1px solid #ddd; /*Light grey border*/
+    margin-bottom: 20px;
+    padding: 15px;
+    background-colour: #b3e6ff; /*Same background as buttons*/
+}
+
+.card-header {
+    background-colour: #0099e6; /*Same as buttons*/
+    colour: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    font-size: 0.9rem;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+/*Selected style for dashboard*/
+.dashboard .card {
+    background-colour: #dde8ed; /*Same as navbar*/
+}
+
+.dashboard .card-header {
+    background-colour: #0099e6; /*Same colour as buttons*/
+}
+
+/*Style for tables*/
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-colour: #0099e6; /*Keeping the same colour paletter across website*/
+    colour: black;
+}
+
+tr:nth-child(even) {
+    background-color: #dde8ed;  /*Same background as navbar for even rows*/
+}
+
+tr:hover {
+    background-color: #ddd;  /*Light grey background on hover*/
+}
+
+
+

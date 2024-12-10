@@ -1,0 +1,31 @@
+<!-- Extends the base html page for each page to keep style consistent -->
+{% extends "base.html" %}
+{% block title %}
+Dashboard
+{% end block %}
+
+{% block content %}
+
+<h2> Welcome! Please log in by inputting your details below: </h2>
+<form method="POST" action="{{url_for('login')}}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.email.label() }}
+        {{ form.email(), placeholder="Please enter your email" }}
+        {% if form.email.errors %}
+            <span class="help-block text-danger"> {{form.email.errors[0] }}</span>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.password.label() }}
+        {{ form.password(), placeholder="Please enter your password" }}
+        {% if form.password.errors %}
+            <span class="help-block text-danger"> {{ form.password.errors[0] }}</span>
+        {% end if %}
+    </div>
+    <div class="form-group">
+        {{ form.submit() }}
+    </div>
+</form>
+
+{% end block %}

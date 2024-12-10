@@ -1,0 +1,8 @@
+<!-- Extenmd the base html page for each page to keep style consistent -->
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<h1>Welcome, {{% current_user.username %}}, here you can see all your transactions! </h1>
+<form method=""
