@@ -26,13 +26,14 @@ class AddTransaction(FlaskForm):
 	submit = SubmitField('Add new transaction')
 
 class AddRefund(FlaskForm):
-	datetime = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
+	date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
 	amount = StringField('Amount', validators=[DataRequired()])
 	status = SelectField('Status', choices = [(x.name, x.value) for x in RefundStatus], validators=[DataRequired()])
 	submit = SubmitField('Add new refund')
 
 class CreateSavingJar(FlaskForm):
 	id = StringField('Jar name', validators=[DataRequired()])
+	name = StringField('Name', validators=[DataRequired()])
 	goal = StringField('Goal', validators=[DataRequired()])
 	submit = SubmitField('Create new saving jar')
 

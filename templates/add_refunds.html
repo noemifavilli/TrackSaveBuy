@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Add a new transaction
+Add a new refund
 {% endblock %}
 
 {% block content %}
@@ -12,12 +12,8 @@ Add a new transaction
         {{ form.amount() }}
     </div>
     <div class="form-group">
-        {{ form.category.label }}
-        {{ form.category() }}
-    </div>
-    <div class="form-group">
-        {{ form.datetime.label }}
-        {{ form.datetime() }}
+        {{ form.date.label }}
+        {{ form.date() }}
     </div>
     <div class="form-group">
         {{ form.status.label }}

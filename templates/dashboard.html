@@ -60,7 +60,7 @@
                     <td>{{ refund.amount}}</td>
                     <td>{{ refund.status }}</td>
                     <td>
-                    <a href="{{ url_for('view_refunds', refund_id = refund.id) }}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{{ url_for('view_refund', refund_id = refund.id) }}" class="btn btn-primary btn-sm">View</a>
                     </td>
                 </tr>
                 {% endfor %}

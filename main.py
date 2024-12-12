@@ -91,20 +91,29 @@ def dashboard():
 """Create route for displaying singular transactions"""
 @app.route('/transactions/<int:transaction_id>', methods=['GET'])
 def view_transaction(transaction_id):
-    transaction = Transactions.query.filter_by(id = transaction_id, user_id = current_user.id).first_of_404()
+    transaction = Transactions.query.filter_by(id = transaction_id, user_id = current_user.id).first_or_404()
+    if not transaction:
+        flash('Warning, transaction not found', 'danger')
+        return redirect(url_for('dashboard'))
     return render_template('transactions.html', transaction = transaction)
 
 
 """Create route to display singular refund"""
 @app.route('/refunds/<int:refund_id>', methods=['GET'])
 def view_refund(refund_id):
-    refund = Refund.query.filter_by(id = refund_id, user_id = current_user.id).first_of_404()
-    return render_template('refunds.html', refunds = refund)
+    refund = Refund.query.filter_by(id = refund_id, user_id = current_user.id).first_or_404()
+    if not refund:
+        flash('Warning, refund not found', 'danger')
+        return redirect(url_for('dashboard'))
+    return render_template('refunds.html', refund = refund)
 
 """Create route for displaying singular saving jar"""
 @app.route('/jars/<int:jar_id>', methods=['GET'])
 def saving_jar(jar_id):
-    jar = SavingJar.query.filter_by(id = jar_id, user_id = current_user.id).first_of_404()
+    jar = SavingJar.query.filter_by(id = jar_id, user_id = current_user.id).first_or_404()
+    if not jar:
+        flash('Warning, saving jar not found', 'danger')
+        return redirect(url_for('dashboard'))
     return render_template('saving_jars.html', jar = jar )
 
 """Create route for adding a refund"""
@@ -113,14 +122,14 @@ def add_refunds():
     form = AddRefund()
     if form.validate_on_submit():
         """Use form data to create new refund"""
-        refund = Refund (user_id = current_user, datetime = form.datetime.data, amount = form.amount.data, status = RefundStatus[form.status.data])
+        refund = Refund (user_id = current_user.id, date = form.date.data, amount = form.amount.data, status = RefundStatus[form.status.data])
         """Add to database"""
         db.session.add(refund)
         db.session.commit()
         flash('Refund has been added to the tracker!', 'success')
-        return redirect(url_for('refunds'))
+        return redirect(url_for('dashboard'))
     """Redirect to refund page if form isnt submitted"""
-    return render_template('refunds.html', form = form)
+    return render_template('add_refunds.html', form = form)
 
 
 
