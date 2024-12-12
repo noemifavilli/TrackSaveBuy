@@ -1,31 +1,30 @@
 /*General style*/
 body {
     font-family: Georgia, serif;
-    background-colour: #b3e6ff; /*Light blue*/
-    colour: #333; /*Dark grey for texts*/
+    background-color: #b3e6ff; /*Light blue*/
+    color: #333; /*Dark grey for texts*/
     margin: 0;
-    padding: 1;
 }
 
 /*Navigation bar style*/
 .navbar {
-    background-colour: #dde8ed; /*Light background*/
+    background-color: #f2f2f2; /*Same background as footer, to maintain style throughout*/
     padding: 10px 20px;
 }
 
 .navbar .navbar-brand {
-    colour: white;
+    color: black;
     font-size: 20px;
     font-weight: bold;
 }
 
 .navbar .navbar-nav .nav-item .nav-link {
-    colour: white /*White texts for inside the links in navbar*/
+    color: black; /*Black texts for inside the links in navbar*/
     padding: 10px 15px;
 }
 
 .navbar .navbar-nav .nav-item .nav-link:hover {
-    background-colour: #0077b3; /*Dark blue when hovering over links*/
+    background-color: #dde8ed; /*Light grey when hovering over links*/
     border-radius: 5px;
 }
 
@@ -35,45 +34,45 @@ body {
 }
 
 .form-control {
-    width: 75%; /*Form fields take up 75% of width*/
+    width: 40%; /*Form fields take up 40% of width*/
     padding: 10px; /*Padding inside fields*/
     border-radius: 5px; /*Rounder corners*/
     border: 1px solid #ccc; /*Light grey borders*/
 }
 
 .form-control:focus {
-    border-colour: #0099e6; /*Blue border when focused*/
+    border-color: #0099e6; /*Blue border when focused*/
     outline: none; /*Remove default outline*/
 }
 
 /*Error message style*/
 .help-block {
-    font-size: 5px:
-    colour: red;
+    font-size: 5px;
+    color: red;
 }
 
 /*Button style*/
 .btn {
-    background-colour: #0099e6/*Also blue button*/
-    colour: white; /*White texts*/
+    background-color: #0099e6;/*Also blue button*/
+    color: black;
     padding: 10px 20px;
-    border-radius: 5px /*Rounded corners*/
+    border-radius: 5px; /*Rounded corners*/
     border: none; /*No borders around buttons*/
     cursor: pointer;
 }
 
 .btn:hover {
-    background-colour: #0056b3; /*Darker blue*/
+    background-color: #6b5d6e3; /*Light blue*/
 }
 
 /*Footer style*/
 footer {
-    background-colour: #0077b3;
-    colour: white;
+    background-color: #0077b3;
+    color: white;
     text-align: center;
-    padding: 20px 0;
+    padding: 15px 0;
     position: fixed;
-    width: 100%
+    width: 100%;
     bottom: 0;
 }
 
@@ -94,12 +93,12 @@ footer p {
     border: 1px solid #ddd; /*Light grey border*/
     margin-bottom: 20px;
     padding: 15px;
-    background-colour: #b3e6ff; /*Same background as buttons*/
+    background-color: #b3e6ff; /*Same background as buttons*/
 }
 
 .card-header {
-    background-colour: #0099e6; /*Same as buttons*/
-    colour: white;
+    background-color: #0099e6; /*Same as buttons*/
+    color: white;
     padding: 10px;
     border-radius: 10px 10px 0 0;
     font-size: 0.9rem;
@@ -111,11 +110,11 @@ footer p {
 
 /*Selected style for dashboard*/
 .dashboard .card {
-    background-colour: #dde8ed; /*Same as navbar*/
+    background-color: #0077b3;; /*Same as navbar*/
 }
 
 .dashboard .card-header {
-    background-colour: #0099e6; /*Same colour as buttons*/
+    background-color: #0099e6; /*Same colour as buttons*/
 }
 
 /*Style for tables*/
@@ -135,8 +134,8 @@ th, td {
 }
 
 th {
-    background-colour: #0099e6; /*Keeping the same colour paletter across website*/
-    colour: black;
+    background-color: #0099e6; /*Keeping the same colour paletter across website*/
+    color: black;
 }
 
 tr:nth-child(even) {

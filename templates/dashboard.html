@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 <title>{% block title %}
     Dashboard
-    {% end block %}</title>
+    {% endblock %}</title>
 
 {% block content %}
 
@@ -31,10 +31,10 @@
                     <td>{{ transaction.category }}</td>
                     <td>{{ transaction.kind }}</td>
                     <td>
-                    <a href="{{ url_for('transactions', transaction_id = transaction.id) }}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{{ url_for('view_transaction', transaction_id = transaction.id) }}" class="btn btn-primary btn-sm">View</a>
                     </td>
                 </tr>
-                {% end for %}
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -60,10 +60,10 @@
                     <td>{{ refund.amount}}</td>
                     <td>{{ refund.status }}</td>
                     <td>
-                    <a href="{{ url_for('refunds', refund_id = refund.id) }}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{{ url_for('view_refunds', refund_id = refund.id) }}" class="btn btn-primary btn-sm">View</a>
                     </td>
                 </tr>
-                {% end for %}
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -89,13 +89,13 @@
                     <td>{{ jar.goal}}</td>
                     <td>{{ jar.current_amount }}</td>
                     <td>
-                    <a href="{{ url_for('saving_jars', jar_id = jar.id) }}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{{ url_for('saving_jar', jar_id = jar.id) }}" class="btn btn-primary btn-sm">View</a>
                     </td>
                 </tr>
-                {% end for %}
+                {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
 </div>
-{% end block %}
+{% endblock %}

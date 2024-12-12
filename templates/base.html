@@ -5,8 +5,8 @@
     <meta charset="UFT-8" />
     <!-- Ensuring the web page is responsive and adjust page width and size according to the device it is being displayed on-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> {% block title %} Track - Save - Buy {% end block %} </title>
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <title> {% block title %} Track - Save - Buy {% endblock %} </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
 </head>
 <body>
     <!-- Navigation bar-->
@@ -22,6 +22,7 @@
                     <!-- Check if the currect user is logged in, if yes, logout, otherwise, login/register -->
                     {% if current_user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{{url_for('logout')}}">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('dashboard')}}">Dashboard</a></li>
                     {% else %}
                     <li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('register')}}">Register</a></li>
@@ -30,11 +31,24 @@
             </div>
         </div>
     </nav>
+    <!-- Flash messages -->
+<div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-{{ messages[0][0] }} alert-dismissible fade show" role="alert">
+                {{ messages[0][1] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
 
     <!-- Container to contain navigation bar, above + another container to contain the page content
         mt-4 is the top margin -->
     <div class="container mt-4">
-        {% block content %}{% end block %}
+        {% block content %}{% endblock %}
     </div>
 
     <footer class="text-center mt-4">
@@ -44,4 +58,4 @@
     <script src="{{url_for('static', filename='/js/bootstrap.bundle.min.js') }}"
 
 </body>
-</!DOCTYPE html>
+</html>

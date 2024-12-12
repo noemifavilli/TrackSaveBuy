@@ -1,3 +1,25 @@
 {% extends "base.html" %}
-
+<title>{%block title% }Saving jar{% endblock %}</title>
 {% block content %}
+<div class="card" style="width: 20px">
+    <div class="card-body">
+        <h5 class="card-title">Saving jar:</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Goal</th>
+                    <th>Current amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ jar.name }} </td>
+                    <td> {{ jar.goal }} </td>
+                    <td> {{ jar.current_amount }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

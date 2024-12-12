@@ -1,8 +1,27 @@
-<!-- Extenmd the base html page for each page to keep style consistent -->
 {% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
-
+<title>{%block title% }Transaction {% endblock %}</title>
 {% block content %}
-
-<h1>Welcome, {{% current_user.username %}}, here you can see all your transactions! </h1>
-<form method=""
+<div class="card" style="width: 20px">
+    <div class="card-body">
+        <h5 class="card-title">Transaction:</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Kind</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ transaction.amount }} </td>
+                    <td> {{ transaction.date }} </td>
+                    <td> {{ transaction.category }} </td>
+                    <td> {{ transaction.kind }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

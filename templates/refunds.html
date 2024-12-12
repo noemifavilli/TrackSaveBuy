@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Refunds</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+<title>{%block title% }Refund {% endblock %}</title>
+{% block content %}
+<div class="card" style="width: 20px">
+    <div class="card-body">
+        <h5 class="card-title">Refund:</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ refund.date }} </td>
+                    <td> {{ refund.amount }} </td>
+                    <td> {{ refund.status }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

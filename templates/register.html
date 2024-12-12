@@ -1,40 +1,43 @@
 {% extends "base.html" %}
 {% block title %}
 Register as a new user
-{% end block %}
+{% endblock %}
 
 {% block content %}
-<h2>Welcome! Please register by inputting your details below:</h2>
-<form method="POST" action="{{url_for('register')}}">
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-        {{ form.username.label }}
-        {{ form.username(), placeholder="Please enter your username" }}
-        {% if form.username.errors %}
-            <span class="help-block text-danger"> {{form.username.errors[0] }}</span>
-        {% endif %}
-    </div>
-    <div class="form-group">
-        {{ form.email.label }}
-        {{ form.email(), placeholder="Please enter your email" }}
-            {% if form.email.errors %}
-              <span class="help-block text-danger"> {{form.email.errors[0] }}</span>
-            {% endif %}
-    </div>
-    <div class="form-group">
-        {{ form.password.label }}
-        {{ form.password(), placeholder="Please enter your password"  }}
-    </div>
-    <div class="form-group">
-        {{ form.confirm_password.label }}
-        {{ form.confirm_password(), placeholder="Please confirm your password"  }}
-            {% if form.confirm_password.errors %}
-              <span class="help-block text-danger"> {{form.confirm_password.errors[0] }}</span>
-            {% endif %}
-    </div>
-    <div class="form-group">
-        {{ form.submit() }}
-    </div>
+<div class="container">
+    <h2>Welcome! Please register by inputting your details below:</h2>
 
+    <form method="POST" action="{{url_for('register')}}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label }}
+            {{ form.username(class_="form-control", placeholder="Please enter your username") }}
+            {% if form.username.errors %}
+                <span class="help-block text-danger"> {{form.username.errors[0] }}</span>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class_="form-control", placeholder="Please enter your email") }}
+                {% if form.email.errors %}
+                  <span class="help-block text-danger"> {{form.email.errors[0] }}</span>
+                {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.password.label }}
+            {{ form.password(class_="form-control", placeholder="Please enter your password") }}
+        </div>
+        <div class="form-group">
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password(class_="form-control", placeholder="Please confirm your password") }}
+                {% if form.confirm_password.errors %}
+                  <span class="help-block text-danger"> {{form.confirm_password.errors[0] }}</span>
+                {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary")}}
+        </div>
+    </form>
+</div>
 
-</form>
+{% endblock %}

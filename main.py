@@ -2,16 +2,13 @@ from flask import Flask, url_for
 from flask import render_template, redirect, flash
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
-from app.forms import AddTransaction, CreateSavingJar, AddRefund
-from app.forms import LoginForm, RegisterForm
-from app.models import User, SavingJar, Transactions, Refund, RefundStatus, IncomeOutcome
 
-"""Initialisation page set up"""
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'My$ecur3Key@2024!'
-app.config['SQLAlCHEMY_DATABASE_URI'] = 'sqlite://app.db'
-db = SQLAlchemy(app)
+from werkzeug.security import generate_password_hash, check_password_hash
+from app.forms import AddTransaction, CreateSavingJar, AddRefund, LoginForm, RegisterForm
+from app.models import User, SavingJar, Transactions, Refund, RefundStatus, IncomeOutcome
+from init import app
+from init import db
+
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
@@ -30,19 +27,26 @@ def register():
     """Check if the user is already logged in, if they are, they are redirected to the dashboard """
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
+    
     form = RegisterForm()
     """POST request + validate input data by checking input data is valid"""
     if form.validate_on_submit():
-        """Hash user password for security reasons"""
-        hashed_password = generate_password_hash(form.password.data)
-        """Create a new user object using the data that have been input in the form and commit changes """
-        user = User(username=form.username.data, email=form.email.data, password_hash=hashed_password.data)
-        db.session.add(user)
-        db.session.commit()
-        """Send a temporary/flash message to confirm registration success"""
-        flash('Registration successful! Please log in.', 'success')
-        """Redirects user to the login page, after they registered"""
-        return redirect(url_for('login'))
+        try:
+            """Hash user password for security reasons"""
+            hashed_password = generate_password_hash(form.password.data)
+            """Create a new user object using the data that have been input in the form and commit changes """
+            user = User(username=form.username.data, email=form.email.data, password_hash=hashed_password)
+            db.session.add(user)
+            db.session.commit()
+            """Send a temporary/flash message to confirm registration success"""
+            flash('Registration successful! Please log in.', 'success')
+            """Redirects user to the login page, after they registered"""
+            return redirect(url_for('login'))
+        except  Exception as e:
+            """Log the error for further debugging"""
+            app.logger.error(f"Error during registration: {e}")
+            flash('There was an error during registration. Please try again.', 'danger')
+
     """Renders the html template and passes the form to it"""
     return render_template('register.html', form=form)
 
@@ -87,7 +91,7 @@ def dashboard():
 """Create route for displaying singular transactions"""
 @app.route('/transactions/<int:transaction_id>', methods=['GET'])
 def view_transaction(transaction_id):
-    transaction = Transactions.query.filter_by(id = transaction_id, user_id = current_user.id).first_or_404()
+    transaction = Transactions.query.filter_by(id = transaction_id, user_id = current_user.id).first_of_404()
     return render_template('transactions.html', transaction = transaction)
 
 
@@ -98,7 +102,7 @@ def view_refund(refund_id):
     return render_template('refunds.html', refunds = refund)
 
 """Create route for displaying singular saving jar"""
-@app.route('/refunds/<int:jar_id>', method=['GET'])
+@app.route('/jars/<int:jar_id>', methods=['GET'])
 def saving_jar(jar_id):
     jar = SavingJar.query.filter_by(id = jar_id, user_id = current_user.id).first_of_404()
     return render_template('saving_jars.html', jar = jar )
@@ -142,7 +146,7 @@ def add_transaction():
 """Create route for creating new saving jars"""
 @app.route('/add_saving_jar', methods=['GET', 'POST'])
 @login_required
-def saving_jar():
+def add_saving_jar():
     form = CreateSavingJar()
     if form.validate_on_submit():
         """Create new jar using data from the form"""

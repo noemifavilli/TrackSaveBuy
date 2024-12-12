@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% block title %}
 Dashboard
-{% end block %}
+{% endblock %}
 
 {% block content %}
 
@@ -11,21 +11,21 @@ Dashboard
     {{ form.hidden_tag() }}
     <div class="form-group">
         {{ form.email.label() }}
-        {{ form.email(), placeholder="Please enter your email" }}
+        {{ form.email(class_="form-control", placeholder="Please enter your email") }}
         {% if form.email.errors %}
             <span class="help-block text-danger"> {{form.email.errors[0] }}</span>
         {% endif %}
     </div>
     <div class="form-group">
         {{ form.password.label() }}
-        {{ form.password(), placeholder="Please enter your password" }}
+        {{ form.password(class_="form-control", placeholder="Please enter your password") }}
         {% if form.password.errors %}
             <span class="help-block text-danger"> {{ form.password.errors[0] }}</span>
-        {% end if %}
+        {% endif %}
     </div>
     <div class="form-group">
-        {{ form.submit() }}
+        {{ form.submit(class="btn btn-primary")}}
     </div>
 </form>
 
-{% end block %}
+{% endblock %}
