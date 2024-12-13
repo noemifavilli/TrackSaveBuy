@@ -42,6 +42,11 @@ class Transactions(db.Model):
 
 	user = db.relationship('User', back_populates='transactions')
 
+"""Access transaction name value"""
+@property
+def kind_name(transaction):
+	return transaction.kind.name
+
 """Refunds"""
 class Refund(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -52,6 +57,10 @@ class Refund(db.Model):
 
 	user = db.relationship('User', back_populates='refunds')
 
+"""Access refund status value"""
+@property
+def status_name(refund):
+	return refund.status.name
 
 """SavingJars table"""
 class SavingJar(db.Model):

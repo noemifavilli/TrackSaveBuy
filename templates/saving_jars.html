@@ -21,5 +21,9 @@
             </tbody>
         </table>
     </div>
+     <a href="{{ url_for('edit_entry', entry_type='saving_jar', id = jar.id) }}" class="btn btn-primary btn-sm">Edit</a>
+    <form action="{{url_for('delete_entry', entry_type = 'saving_jar', id = jar.id )}}" method="POST">
+        <button type="submit" class="delete-button btn-danger">Delete</button>
+    </form>
 </div>
 {% endblock %}

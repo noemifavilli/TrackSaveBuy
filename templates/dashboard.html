@@ -29,7 +29,7 @@
                     <td>{{ transaction.date}}</td>
                     <td>{{ transaction.amount}}</td>
                     <td>{{ transaction.category }}</td>
-                    <td>{{ transaction.kind }}</td>
+                    <td>{{ transaction.kind.name }}</td>
                     <td>
                     <a href="{{ url_for('view_transaction', transaction_id = transaction.id) }}" class="btn btn-primary btn-sm">View</a>
                     </td>
@@ -58,7 +58,7 @@
                 <tr>
                     <td>{{ refund.date}}</td>
                     <td>{{ refund.amount}}</td>
-                    <td>{{ refund.status }}</td>
+                    <td>{{ refund.status.name }}</td>
                     <td>
                     <a href="{{ url_for('view_refund', refund_id = refund.id) }}" class="btn btn-primary btn-sm">View</a>
                     </td>
@@ -85,8 +85,8 @@
             <tbody>
                 {% for jar in jars %}
                 <tr>
-                    <td>{{ jar.name}}</td>
-                    <td>{{ jar.goal}}</td>
+                    <td>{{ jar.name }}</td>
+                    <td>{{ jar.goal }}</td>
                     <td>{{ jar.current_amount }}</td>
                     <td>
                     <a href="{{ url_for('saving_jar', jar_id = jar.id) }}" class="btn btn-primary btn-sm">View</a>

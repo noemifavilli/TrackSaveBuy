@@ -32,8 +32,8 @@ class AddRefund(FlaskForm):
 	submit = SubmitField('Add new refund')
 
 class CreateSavingJar(FlaskForm):
-	id = StringField('Jar name', validators=[DataRequired()])
 	name = StringField('Name', validators=[DataRequired()])
 	goal = StringField('Goal', validators=[DataRequired()])
+	current_amount = StringField('Amount', validators=[DataRequired()])
 	submit = SubmitField('Create new saving jar')
 

@@ -16,10 +16,14 @@
                 <tr>
                     <td> {{ refund.date }} </td>
                     <td> {{ refund.amount }} </td>
-                    <td> {{ refund.status }} </td>
+                    <td> {{ refund.status.name }} </td>
                 </tr>
             </tbody>
         </table>
     </div>
+     <a href="{{ url_for('edit_entry', entry_type='refund', id = refund.id) }}" class="btn btn-primary btn-sm">Edit</a>
+    <form action="{{url_for('delete_entry', entry_type = 'refund', id = refund.id )}}" method="POST" style="display:inline;">
+        <button type="submit" class="delete-button btn-danger">Delete</button>
+    </form>
 </div>
 {% endblock %}

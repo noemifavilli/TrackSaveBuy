@@ -1,16 +1,27 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, abort, request
 from flask import render_template, redirect, flash
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from flask_sqlalchemy import SQLAlchemy
-
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.forms import AddTransaction, CreateSavingJar, AddRefund, LoginForm, RegisterForm
 from app.models import User, SavingJar, Transactions, Refund, RefundStatus, IncomeOutcome
-from init import app
-from init import db
+from init import app, db
+
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
+"""Define function used later"""
+def get_entry_type_id(entry_type, id):
+    if entry_type == 'transaction':
+        return Transactions.query.get_or_404(id)
+    elif entry_type == 'refund':
+        return  Refund.query.get_or_404(id)
+    elif entry_type == 'saving_jar':
+        return SavingJar.query.get_or_404(id)
+    else:
+        return None
 
 
 @login_manager.user_loader
@@ -95,7 +106,8 @@ def view_transaction(transaction_id):
     if not transaction:
         flash('Warning, transaction not found', 'danger')
         return redirect(url_for('dashboard'))
-    return render_template('transactions.html', transaction = transaction)
+
+    return render_template('transactions.html', transaction = transaction, kind_name = transaction.kind.name)
 
 
 """Create route to display singular refund"""
@@ -105,7 +117,7 @@ def view_refund(refund_id):
     if not refund:
         flash('Warning, refund not found', 'danger')
         return redirect(url_for('dashboard'))
-    return render_template('refunds.html', refund = refund)
+    return render_template('refunds.html', refund = refund, status_name = refund.status.name)
 
 """Create route for displaying singular saving jar"""
 @app.route('/jars/<int:jar_id>', methods=['GET'])
@@ -131,8 +143,6 @@ def add_refunds():
     """Redirect to refund page if form isnt submitted"""
     return render_template('add_refunds.html', form = form)
 
-
-
 """Create route for adding transactions"""
 @app.route('/add_transaction', methods=['GET', 'POST'])
 @login_required
@@ -151,7 +161,6 @@ def add_transaction():
     """If form hasnt been submitted, redirect user to the form"""
     return render_template('add_transaction.html', form = form)
 
-
 """Create route for creating new saving jars"""
 @app.route('/add_saving_jar', methods=['GET', 'POST'])
 @login_required
@@ -159,7 +168,8 @@ def add_saving_jar():
     form = CreateSavingJar()
     if form.validate_on_submit():
         """Create new jar using data from the form"""
-        jar = SavingJar (user_id = current_user.id, name = form.name.data, goal = form.goal.data)
+        jar = SavingJar (user_id = current_user.id, name = form.name.data, goal = form.goal.data, current_amount = form.current_amount.data )
+        print("Form submitted")
         """Add jar to db"""
         db.session.add(jar)
         db.session.commit()
@@ -167,12 +177,48 @@ def add_saving_jar():
         flash('Jar has been created successfully', 'success')
         """Redirect user to dashboard"""
         return redirect(url_for('dashboard'))
+    else:
+        print("Form not submitted", form.errors, request.form)
     """If form hasnt been submitted, redirect user to it"""
     return render_template('add_saving_jar.html', form = form)
 
+"""Create route for editing entries"""
+@app.route('/<entry_type>/<int:id>/edit', methods=['GET', 'POST'])
+def edit_entry(entry_type, id):
+    entry = get_entry_type_id(entry_type, id)
+    if not entry:
+        abort(404)
+    """Abort operation if entry not found"""
+    if request.method == 'POST':
+        """Update field according to the entry type"""
+        if entry_type == 'transaction':
+            entry.amount = float(request.form['amount'])
+            """Capital Y is for four digit year format, y is for two digit year format"""
+            entry.date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
+            entry.category = request.form['category']
+            entry.kind = request.form['kind']
+        if entry_type == 'refund':
+            entry.amount = float(request.form['amount'])
+            entry.date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
+            entry.status = request.form['status']
+        elif entry_type == 'saving_jar':
+            entry.name = request.form['name']
+            entry.goal = request.form['goal']
+        db.session.commit()
+        return redirect(url_for('dashboard'))
+    return  render_template('edit_entry.html', entry = entry, entry_type = entry_type)
 
 
-
+"""Create route for deleting entry"""
+@app.route('/<entry_type>/<int:id>/delete', methods=['POST'])
+def delete_entry(entry_type, id):
+    entry = get_entry_type_id(entry_type, id)
+    if not entry:
+        abort(404)
+    db.session.delete(entry)
+    db.session.commit()
+    """Once entry is deleted, redirect user at dashbaord"""
+    return redirect(url_for('dashboard'))
 
 
 if __name__ == "__main__":
