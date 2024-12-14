@@ -7,8 +7,6 @@ Home - Track - Save - Buy
 {% block content %}
 <div class="text-center">
   <h1>Welcome to Track, Save and Buy!</h1>
-  <p class="lead">Track all of your expenses in one place!
-  Set saving goals, track refunds and so much more </p>
   {% if current_user.is_authenticated %}
     <a href="{{ url_for('dashboard') }}" class="btn btn-dashboard">Go to Dashboard</a>
     <a href="{{url_for('logout')}}" class="btn btn-logout">Logout</a>
@@ -16,5 +14,8 @@ Home - Track - Save - Buy
     <a href="{{ url_for('register') }}" class="btn btn-register">Register as a new user</a>
     <a href=" {{ url_for('login') }}" class="btn btn-login">Login</a>
   {% endif %}
+  <div class="image">
+    <img src="{{url_for('static', filename='img/logo.png')}}" >
+  </div>
 </div>
  {% endblock %}

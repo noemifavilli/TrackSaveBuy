@@ -2,18 +2,20 @@
 html, body {
     height: 100%;
     font-family: Georgia, serif;
-    background-color: #b3e6ff; /*Light blue*/
+    /*background-color: #cccccc;*/
+   /* background-image: linear-gradient(to left, 180deg, blue, white); */
+    /*background-color: #b3e6ff; Light blue*/
     color: #333; /*Dark grey for texts*/
     margin: 0;
     overflow-y: auto;/*Vertical scroll, y axes*/
     overflow-x: hidden;
 
-    /*background-image: url_for('static/img/pattern.png');
-    background-color: rgba(255, 255, 255, 0.5);
+    background-image: url('static/img/background.png');
+    background-color: ##ddeedd;
     background-blend-mode: overlay;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;*/
+    background-position: center;
 }
 
 /*Scroll bar style*/
@@ -31,15 +33,71 @@ html, body {
     padding: 50px;
 }
 
-/*Style of logo in header*/
-header img {
-    max-height: 15px;
-    margin-left: 40px;
-    margin-top: 10px;
+/*Style of header*/
+header {
+    display: grid; /*Enable grid layout*/
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr; /*2 columns and 2 rows, texts and logo and date*/
+    justify-content: center; /*Pushes items to edges*/
+    align-items: center;
+    padding: 10px;
+    background-color: #c2d4dd;
+    height: 105px;
 }
+
+header .logo {
+    grid-row: 2 / 3; /*Second row*/
+    grid-column: 1 / 2; /*First col*/
+    top: 7%;
+    left: 2%;
+}
+
+header .logo img {
+    height: 130px;
+    width: 130px;
+}
+
+.datetime {
+    grid-row: 2 / 3;
+    grid-column: 3 / 3; /*2nd row, 2nd col*/
+    font-size: 0.9rem;
+    color: black;
+    align-self: top;
+    justify-self: right;
+    text-align: top;
+    font-style: italic;
+}
+
+.header-text1 {
+    grid-row: 1 / 3;
+    grid-column: 2 / 3; /*1st row, 1st col*/
+    font-size: 20px;
+    text-align: left;
+}
+
+.header-text2 {
+    grid-row: 2 / 3;
+    grid-column: 3 / 3; /*1st row, 2nd col*/
+    font-weight: italic;
+    font-size: 20px;
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.image {
+    position: absolute;
+    top: 40%;
+    left: 39%;
+    height: 50px;
+    width: 50px;
+}
+
 /*Drop down menu style*/
 .navbar {
-    background-color: #0077b3;
+    background-color: #c2d4dd;
     padding: 10px;
     width: 100%;
 }
@@ -96,7 +154,7 @@ header img {
 }
 
 .form-control {
-    width: 40%; /*Form fields take up 40% of width*/
+    width: 35%; /*Form fields take up 35% of width*/
     padding: 10px; /*Padding inside fields*/
     border-radius: 5px; /*Rounder corners*/
     border: 1px solid #ccc; /*Light grey borders*/
@@ -121,6 +179,7 @@ header img {
     border-radius: 5px; /*Rounded corners*/
     border: none; /*No borders around buttons*/
     cursor: pointer;
+    font-size: 16px;
 }
 
 .delete-button {
@@ -173,7 +232,6 @@ footer p {
     border: 1px solid #ddd; /*Light grey border*/
     margin-bottom: 20px;
     padding: 30px;
-    background-color: #b3e6ff; /*Same background as buttons*/
 }
 
 .card-header {
@@ -206,7 +264,7 @@ h5 {
 /*Style for tables*/
 table {
     width: 100%;
-    min-height: 300px;
+    min-height: 100px;
     margin-top: 20px;
     padding: 30px;
     outline: #0099e6;
@@ -217,13 +275,17 @@ table, th, td {
 }
 
 th, td {
-    padding: 50px;
+    padding: 10px;
     text-align: center;
 }
 
 th {
-    background-color: #0099e6; /*Keeping the same colour paletter across website*/
+    background-color: #b3e0ff; /*Keeping the same colour paletter across website*/
     color: black;
+}
+
+tbody {
+    background-color: #e6f9ff;
 }
 
 tr {

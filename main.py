@@ -3,6 +3,8 @@ from flask import render_template, redirect, flash
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
+from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.forms import AddTransaction, CreateSavingJar, AddRefund, LoginForm, RegisterForm
 from app.models import User, SavingJar, Transactions, Refund, RefundStatus, IncomeOutcome
@@ -92,12 +94,27 @@ def logout():
 """Create route for dashboard"""
 @app.route('/dashboard')
 def dashboard():
+    """Datetime"""
+    current_datetime = datetime.now().strftime('%A, %d %B %Y %H:%M:%S')
+
+    """Display total of income and outcome of the user"""
+    income_transactions = Transactions.query.filter_by(user_id = current_user.id, kind = 'Income').all()
+    outcome_transactions = Transactions.query.filter_by(user_id = current_user.id, kind = 'Outcome').all()
+    """Calculate such income and outcome"""
+    total_income = db.session.query(func.sum(Transactions.amount)).filter(Transactions.user_id == current_user.id, Transactions.kind == 'Income').scalar()
+    total_outcome = db.session.query(func.sum(Transactions.amount)).filter(Transactions.user_id == current_user.id, Transactions.kind == 'Outcome').scalar()
+
     """Fetch all transactions and saving jars of the user"""
     transactions = Transactions.query.filter_by(user_id = current_user.id).all()
     refunds = Refund.query.filter_by(user_id = current_user.id).all()
     saving_jars = SavingJar.query.filter_by(user_id = current_user.id).all()
+
     """Pass to the template for the dashboard transactions and saving jars"""
-    return render_template('dashboard.html', transactions = transactions, refunds = refunds, saving_jars = saving_jars)
+    return render_template('dashboard.html', transactions = transactions, refunds = refunds, saving_jars = saving_jars,
+                           current_datetime = current_datetime, income_transactions = income_transactions,
+                           outcome_transactions = outcome_transactions,
+                           total_income = total_income,
+                           total_outcome = total_outcome)
 
 """Create route for displaying singular transactions"""
 @app.route('/transactions/<int:transaction_id>', methods=['GET'])

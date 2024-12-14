@@ -8,11 +8,50 @@
 
 <div class="container mt-5">
 <h1> Welcome, {{ current_user.username }} </h1>
-
+<div class="datetime">
+    <span id="datetime">{{ current_datetime }}</span>
+</div>
+<div class="total-in-out">
+    <div class="col-md-6">
+        <h2>Total income and outcome</h2>
+        <table class="table-striped">
+            <thead>
+            <tr>
+                <th>Income</th>
+                <th>Outcome</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {% for transaction in income_transactions %}
+                        <div>{{ transaction.category }}: £{{ "%.2f"|format(transaction.amount|default(0.0)) }}</div>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for transaction in outcome_transactions %}
+                        <div> {{ transaction.category }}: £{{ "%.2f"|format(transaction.amount|default(0.0)) }} </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <strong>Total Income: </strong> £{{ "%.2f"|format(total_income)}}
+                    </td>
+                    <td>
+                        <strong>Total Outcome: </strong> £{{ "%.2f"|format(total_outcome)}}
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
 <!-- Display transactions -->
 <div class="table">
     <div class="card-body">
-        <h2 class="card-title">Your transactions</h2>
+        <h3 class="card-title">Your transactions</h3>
         <a href="{{ url_for('add_transaction') }}" class="btn btn-primary btn-sm">Add new transaction</a>
         <table class="table table-striped">
             <thead>
@@ -98,4 +137,5 @@
     </div>
 </div>
 </div>
+
 {% endblock %}
