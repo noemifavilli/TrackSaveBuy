@@ -94,9 +94,7 @@ def logout():
 """Create route for dashboard"""
 @app.route('/dashboard')
 def dashboard():
-    """Datetime"""
-    current_datetime = datetime.now().strftime('%A, %d %B %Y %H:%M:%S')
-
+    current_datetime = datetime.now().strftime('%B %d, %Y - %H:%M')
     """Display total of income and outcome of the user"""
     income_transactions = Transactions.query.filter_by(user_id = current_user.id, kind = 'Income').all()
     outcome_transactions = Transactions.query.filter_by(user_id = current_user.id, kind = 'Outcome').all()

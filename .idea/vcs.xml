@@ -2,7 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/AdvWebTech" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/main" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/repo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/repo/github" vcs="Git" />
   </component>
 </project>

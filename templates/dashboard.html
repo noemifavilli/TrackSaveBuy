@@ -7,10 +7,6 @@
 {% block content %}
 
 <div class="container mt-5">
-<h1> Welcome, {{ current_user.username }} </h1>
-<div class="datetime">
-    <span id="datetime">{{ current_datetime }}</span>
-</div>
 <div class="total-in-out">
     <div class="col-md-6">
         <h2>Total income and outcome</h2>
@@ -52,7 +48,6 @@
 <div class="table">
     <div class="card-body">
         <h3 class="card-title">Your transactions</h3>
-        <a href="{{ url_for('add_transaction') }}" class="btn btn-primary btn-sm">Add new transaction</a>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -83,7 +78,6 @@
 <div class="table">
     <div class="card-body">
         <h2 class="card-title">Your refunds</h2>
-        <a href="{{ url_for('add_refunds') }}" class="btn btn-primary btn-sm">Add new refund</a>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -112,7 +106,6 @@
 <div class="table">
     <div class="card-body">
         <h2 class="card-title">Your saving jars</h2>
-        <a href="{{ url_for('add_saving_jar') }}" class="btn btn-primary btn-sm">Add new saving jar</a>
         <table class="table table-striped">
             <thead>
             <tr>
