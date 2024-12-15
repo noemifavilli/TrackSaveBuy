@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<title> {% block title %} Track - Save - Buy {% endblock %} </title>
+<link rel="icon" href="{{url_for('static', filename='ico/favicon.png')}}">
+<!-- Sets character encoding to ensure correct display of characters and symbols-->
+<meta charset="UFT-8" />
+<!-- Ensuring the web page is responsive and adjust page width and size according to the device it is being displayed on-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+<header>
+     <div class="header-text1">Track all of your expenses in one place!</div>
+     <div class="header-text2">Set saving goals, track refunds and so much more</div>
+
+    <div class="logo">
+        <img src="{{url_for('static', filename='img/logo.png')}}" >
+    </div>
+</header>
+<body>
+<!--Drop down menu-->
+<nav class="navbar">
+    <div class="welcome">
+        {% if request.path == '/dashboard' %}
+        <a class="welcome-user"> Welcome, {{ current_user.username }}</a>
+        <a class="newOptions">Add a new entry from the menu on the left.</a>
+        {% else %}
+        <a class="options"> Please choose an option:</a>
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('dashboard') }}" class="btn btn-dashboard">Go to Dashboard</a>
+            <a href="{{url_for('logout')}}" class="btn btn-logout">Logout</a>
+            {% else %}
+            <a href="{{ url_for('register') }}" class="btn btn-register">Register as a new user</a>
+            <a href=" {{ url_for('login') }}" class="btn btn-login">Login</a>
+            {% endif %}
+        {% endif %}
+    </div>
+    <ul class="nav-list">
+        <li class="dropdown">
+            <a href="#" class="dropdown">Menu</a>
+            <div class="dropdown-content">
+                {% if current_user.is_authenticated %}
+                <a href="{{url_for('dashboard')}}">Home</a>
+                <a href="{{url_for('add_transaction')}}">Add new transaction</a>
+                <a href="{{url_for('add_refunds')}}">Add new refund</a>
+                <a href="{{url_for('add_saving_jar')}}">Add new saving jar</a>
+                <a href="{{url_for('logout')}}">Logout</a>
+                {% endif %}
+            </div>
+        </li>
+    </ul>
+    <span id="time"> {{ current_datetime }}</span>
+</nav>
+    <!-- Flash messages -->
+<div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories = true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for message in messages %}
+                <ul class=" category ">{{message}}</ul>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class=" "> </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- Container to contain navigation bar, above + another container to contain the page content
+    mt-4 is the top margin -->
+<div class="containerBody">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer class="text-center mt-4">
+    <p> @ 2024 Track - Save - Buy. All Rights Reserved </p>
+</footer>
+
+<!--Function to continuosly update datetime everysecond
+gets refernce to element declared in dashboard html
+created function that updates with the time
+call said function every second (1000) to keep it up to date
+Code snippet taken from StackOverflow -->
+<script>
+    var Time = document.getElementById("time");
+        function updateTime() {
+        Time.innerHTML = new Date().toLocaleTimeString();
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+
+</script>
+
+
+</body>
+</html>

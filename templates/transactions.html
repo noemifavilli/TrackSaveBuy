@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+<title>{%block title%}Transaction {% endblock %}</title>
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Transaction:</h5>
+        <table class="table table-striped" width="80%">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Kind</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> £{{ transaction.amount }} </td>
+                    <td> {{ transaction.date }} </td>
+                    <td> {{ transaction.category }} </td>
+                    <td> {{ transaction.kind.name }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="{{ url_for('edit_entry', entry_type='transaction', id = transaction.id) }}" class="btn btn-primary btn-sm">Edit</a>
+    <form action="{{url_for('delete_entry', entry_type = 'transaction', id = transaction.id )}}" method="POST" style="display:inline;">
+        <button type="submit" class="delete-button btn-danger">Delete</button>
+    </form>
+</div>
+{% endblock %}

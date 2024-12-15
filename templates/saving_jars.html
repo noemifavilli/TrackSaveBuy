@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+<title>{%block title%}Saving jar{% endblock %}</title>
+{% block content %}
+<div class="card" >
+    <div class="card-body">
+        <h5 class="card-title">Saving jar:</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Goal</th>
+                    <th>Current amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ jar.name }} </td>
+                    <td> £{{ jar.goal }} </td>
+                    <td> £{{ jar.current_amount }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+     <a href="{{ url_for('edit_entry', entry_type='saving_jar', id = jar.id) }}" class="btn btn-primary btn-sm">Edit</a>
+    <form action="{{url_for('delete_entry', entry_type = 'saving_jar', id = jar.id )}}" method="POST">
+        <button type="submit" class="delete-button btn-danger">Delete</button>
+    </form>
+</div>
+{% endblock %}
