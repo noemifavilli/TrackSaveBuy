@@ -62,7 +62,7 @@
                 <tr>
                     <td>{{ transaction.date}}</td>
                     <td>£{{ transaction.amount}}</td>
-                    <td>£{{ transaction.category }}</td>
+                    <td>{{ transaction.category }}</td>
                     <td>{{ transaction.kind.name }}</td>
                     <td>
                     <a href="{{ url_for('view_transaction', transaction_id = transaction.id) }}" class="btn btn-primary btn-sm">View</a>

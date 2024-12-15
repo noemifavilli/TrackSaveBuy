@@ -3,7 +3,6 @@ from flask import render_template, redirect, flash
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
 from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.forms import AddTransaction, CreateSavingJar, AddRefund, LoginForm, RegisterForm
