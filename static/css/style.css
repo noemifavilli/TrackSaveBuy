@@ -10,7 +10,6 @@ html, body {
     hover-color: none;
 }
 
-
 /*Scroll bar style*/
 ::-webkit-scrollbar {
     width: 10px;
@@ -99,7 +98,8 @@ time {
     left: 39%;
     height: 50px;
     width: 50px;
-    }
+}
+
 
 /*Drop down menu style*/
 .navbar {
@@ -127,7 +127,6 @@ time {
     font-weight: semi-bold;
 }
 
-
 .options {
     font-size: 20px;
     text-align: center;
@@ -135,7 +134,6 @@ time {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-weight: semi-bold;
 }
-
 
 .nav-list {
     list-style: none;
@@ -267,6 +265,7 @@ footer p {
     overflow-y: auto; /*Ensures scroll*/
 }
 
+<<<<<<< HEAD
 .container-body {
     padding-bottom: 20px;
 }
@@ -353,6 +352,7 @@ tbody {
     background-image: none;
     background-color: #cfe0e8;
 }
+
 tr {
     height: 3px;
 }

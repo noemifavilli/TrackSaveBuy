@@ -108,6 +108,7 @@ def dashboard():
 
     """Pass to the template for the dashboard transactions and saving jars"""
     return render_template('dashboard.html', transactions = transactions, refunds = refunds, jars = jar,
+
                            current_datetime = current_datetime, income_transactions = income_transactions,
                            outcome_transactions = outcome_transactions,
                            total_income = total_income,
